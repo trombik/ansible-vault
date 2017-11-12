@@ -47,7 +47,7 @@ RSpec.describe Ansible::Vault do
       end
     end
   end
-  context "with ANSIBLE_VAULT_PASSWORD_FILE set" do
+  context "without ANSIBLE_VAULT_PASSWORD_FILE set" do
     before(:all) { ENV.delete("ANSIBLE_VAULT_PASSWORD_FILE") }
 
     describe "#decrypt" do
