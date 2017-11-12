@@ -1,5 +1,16 @@
+---
 sudo: false
 language: ruby
+python: "2.7"
+
+# Install ansible
+addons:
+  apt:
+    packages:
+    - python-pip
 rvm:
   - 2.3.5
-before_install: gem install bundler -v 1.16.0
+before_install:
+  - gem install bundler -v 1.16.0
+  - pip install --user ansible
+  - ansible --version
