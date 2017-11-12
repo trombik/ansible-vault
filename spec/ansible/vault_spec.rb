@@ -4,7 +4,7 @@ RSpec.describe Ansible::Vault do
   end
 
   def ansible_is_available?
-    `which ansible`.length > 1
+    `which ansible-vault`.length > 1
   end
 
   current_dir = Pathname.new(__FILE__).dirname
@@ -37,6 +37,7 @@ RSpec.describe Ansible::Vault do
       let(:original_yaml) { YAML.safe_load(original) }
 
       it "decrypts without exceptions" do
+        skip "ansible is not available" unless ansible_is_available?
         expect { Ansible::Vault.decrypt_as_yaml(file: encrypted_file) }.not_to raise_exception
       end
 
