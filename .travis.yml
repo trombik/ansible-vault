@@ -11,6 +11,8 @@ addons:
 rvm:
   - 2.3.5
 before_install:
-  - gem install bundler -v 1.16.0
+
+  # use bundler 2.x
+  - gem install bundler
   - pip install --user ansible
   - ansible --version
