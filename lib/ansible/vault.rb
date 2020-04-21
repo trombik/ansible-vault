@@ -7,7 +7,7 @@ end
 module Ansible
   # helper mthods to decrypt files by ansible-vault
   module Vault
-    @command = "ansible-vault decrypt --output='-'"
+    @command = "ansible-vault view"
 
     # Decrypts encrypted file using ansible-vault
     #
