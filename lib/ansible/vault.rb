@@ -15,13 +15,13 @@ module Ansible
     # @return [String] decrypted content of the file
     def self.decrypt(file:)
       raise_if_env_is_not_set
-      Open3.popen3("#{@command} '#{file}'") do |_i, o, e, thr|
-        unless thr.value.success?
-          msg = "failed to run `%s`: status: `%s` stderr: `%s`"
-          raise format(msg, @command, thr.value.to_i, e.read)
-        end
-        o.read
-      end
+      o, e, s = run_command("#{@command} '#{file}'")
+      raise "failed to decrypt file `#{file}`: `#{e}`" unless s.success?
+      o
+    end
+
+    def self.run_command(cmd)
+      Open3.capture3(cmd)
     end
 
     # Decrypts encrypted file as YAML using ansible-vault
